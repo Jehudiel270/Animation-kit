@@ -21,6 +21,96 @@ body::-webkit-scrollbar-track, [data-lenis-prevent]::-webkit-scrollbar-track { b
 body::-webkit-scrollbar-thumb, [data-lenis-prevent]::-webkit-scrollbar-thumb { border: 2px solid var(--color-ink); border-radius: 999px; background: var(--color-violet); }
 body::-webkit-scrollbar-thumb:hover, [data-lenis-prevent]::-webkit-scrollbar-thumb:hover { background: var(--color-teal); }
 :focus-visible { outline: 2px solid var(--color-teal); outline-offset: 2px; }
+input[type="range"] {
+  width: 100%;
+  height: 1.25rem;
+  margin: 0;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  touch-action: pan-y;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: .35rem;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--color-violet), var(--color-teal));
+}
+input[type="range"]::-moz-range-track {
+  height: .35rem;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--color-violet), var(--color-teal));
+}
+input[type="range"]::-webkit-slider-thumb {
+  width: 1rem;
+  height: 1rem;
+  margin-top: -.36rem;
+  appearance: none;
+  border: 2px solid var(--color-text);
+  border-radius: 50%;
+  background: var(--color-violet);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-violet) 24%, transparent);
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+input[type="range"]::-moz-range-thumb {
+  width: .75rem;
+  height: .75rem;
+  border: 2px solid var(--color-text);
+  border-radius: 50%;
+  background: var(--color-violet);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-violet) 24%, transparent);
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+input[type="range"]:hover::-webkit-slider-thumb { box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-violet) 24%, transparent); }
+input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.18); }
+input[type="range"]:focus-visible { outline: none; }
+input[type="range"]:focus-visible::-webkit-slider-thumb { outline: 2px solid var(--color-teal); outline-offset: 3px; }
+input[type="range"]:focus-visible::-moz-range-thumb { outline: 2px solid var(--color-teal); outline-offset: 3px; }
+input[type="checkbox"] {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: 0 0 auto;
+  appearance: none;
+  border: 1px solid var(--color-line);
+  border-radius: .35rem;
+  background-color: var(--color-ink);
+  cursor: pointer;
+  transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+}
+input[type="checkbox"]:checked {
+  border-color: var(--color-violet);
+  background-color: var(--color-violet);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m3 8 3.2 3.2L13 4.5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+input[type="checkbox"]:active { transform: scale(.92); }
+input[type="color"] {
+  min-width: 2.75rem;
+  min-height: 2.25rem;
+  padding: .2rem;
+  border: 1px solid var(--color-line);
+  border-radius: .7rem;
+  background: var(--color-panel);
+  cursor: pointer;
+}
+input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+input[type="color"]::-webkit-color-swatch { border: 0; border-radius: .42rem; }
+input[type="color"]::-moz-color-swatch { border: 0; border-radius: .42rem; }
+input:is([type="text"], [type="email"], [type="search"], [type="number"], [type="url"], [type="tel"]),
+select,
+textarea {
+  border-color: var(--color-line);
+  border-radius: .7rem;
+  background-color: var(--color-panel);
+  color: var(--color-text);
+  accent-color: var(--color-violet);
+}
+input:is([type="text"], [type="email"], [type="search"], [type="number"], [type="url"], [type="tel"])::placeholder,
+textarea::placeholder { color: var(--color-mute); opacity: .75; }
+input:is([type="text"], [type="email"], [type="search"], [type="number"], [type="url"], [type="tel"]):focus,
+select:focus,
+textarea:focus { border-color: var(--color-violet); }
+select { color-scheme: inherit; }
 .btn { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: .5rem; border-radius: 999px; padding: .6rem 1.4rem; font-weight: 600; cursor: pointer; transition: transform .2s; }
 .btn:active { transform: scale(.97); }
 .btn-primary { background: var(--color-violet); color: #fff; }
