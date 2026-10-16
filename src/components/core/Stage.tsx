@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import Lab from "@/legacy-v1/components/Lab";
 import { REG as LEGACY_EFFECTS, type Fx } from "@/legacy-v1/lib/registry";
 import { v2ControlsFor } from "@/registry/v2-controls";
-import type { FamilyId, Item } from "@/registry/types";
+import type { Item } from "@/registry/types";
 
 /** true quand l'élément est visible. Sert à ne monter les démos lourdes (WebGL...) que quand on les voit. */
 export function useInView<T extends HTMLElement>(margin = "100px") {
@@ -91,7 +91,7 @@ export function Stage({ id, title, lib, children, legacy, item, siblings = [] }:
               lib: activeItem.lib,
               family: activeItem.id.split("-")[0] ?? "",
               preview: <activeItem.C />,
-              controls: v2ControlsFor(activeItem.id, activeItem.title, activeItem.id.split("-")[0] as FamilyId),
+              controls: v2ControlsFor(activeItem.id),
             }}
             onClose={() => setOpen(false)}
             onNav={(delta) => {
