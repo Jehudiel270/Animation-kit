@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+/* Thème : change ces variables pour re-colorer tout le kit. */
+@theme {
+  --color-ink: #0e0f1a;
+  --color-panel: #171a2b;
+  --color-line: #2b3050;
+  --color-text: #edeef7;
+  --color-mute: #a3a8c7;
+  --color-violet: #7c5cff;
+  --color-teal: #3ddbd9;
+  --color-amber: #ffb547;
+  --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-code: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html { color-scheme: dark; scrollbar-color: var(--color-violet) var(--color-ink); scrollbar-width: thin; }
+body { background: var(--color-ink); color: var(--color-text); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; transition: background-color .45s ease, color .45s ease; }
+body::-webkit-scrollbar, [data-lenis-prevent]::-webkit-scrollbar { width: 10px; height: 10px; }
+body::-webkit-scrollbar-track, [data-lenis-prevent]::-webkit-scrollbar-track { background: var(--color-ink); }
+body::-webkit-scrollbar-thumb, [data-lenis-prevent]::-webkit-scrollbar-thumb { border: 2px solid var(--color-ink); border-radius: 999px; background: var(--color-violet); }
+body::-webkit-scrollbar-thumb:hover, [data-lenis-prevent]::-webkit-scrollbar-thumb:hover { background: var(--color-teal); }
+:focus-visible { outline: 2px solid var(--color-teal); outline-offset: 2px; }
+.btn { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: .5rem; border-radius: 999px; padding: .6rem 1.4rem; font-weight: 600; cursor: pointer; transition: transform .2s; }
+.btn:active { transform: scale(.97); }
+.btn-primary { background: var(--color-violet); color: #fff; }
+.btn-ghost { border: 1px solid var(--color-line); color: var(--color-text); }
+.icon-btn { display: grid; height: 36px; width: 36px; place-items: center; border-radius: 10px; border: 1px solid var(--color-line); color: var(--color-mute); cursor: pointer; }
+.icon-btn:hover { color: var(--color-text); border-color: var(--color-mute); }
+.fill > div, .fill canvas { width: 100% !important; height: 100% !important; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+::selection { background: #7c5cff; color: white; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }

@@ -1,0 +1,2 @@
+Dépose ici tes fichiers .riv (export de rive.app), puis utilise :
+<RiveSlot src="/rive/mon-animation.riv" />

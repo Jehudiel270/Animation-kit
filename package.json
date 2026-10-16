@@ -1,0 +1,50 @@
+{
+  "name": "motion-kit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Kit front fusionné V1 + V2 : 396 animations, 26 thèmes, sections de landing et bibliothèque d'icônes.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:static": "cross-env BUILD_TARGET=export next build",
+    "build:standalone": "cross-env BUILD_TARGET=standalone next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@formkit/auto-animate": "^0.10.0",
+    "@gsap/react": "^2.1.2",
+    "@react-three/drei": "^10.7.9",
+    "@react-three/fiber": "^9.8.2",
+    "@rive-app/react-canvas": "^4.36.0",
+    "@tsparticles/engine": "^4.4.0",
+    "@tsparticles/plugin-emitters": "^4.4.0",
+    "@tsparticles/react": "^4.4.0",
+    "@tsparticles/slim": "^4.4.0",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.26",
+    "lottie-react": "^3.1.2",
+    "lucide-react": "^1.57.0",
+    "motion": "^14.2.0",
+    "next": "^16.4.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "split-type": "^0.3.4",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.186.0",
+    "cross-env": "^10.1.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}
