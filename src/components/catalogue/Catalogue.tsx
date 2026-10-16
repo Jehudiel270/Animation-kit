@@ -38,7 +38,7 @@ export function Catalogue() {
             {f.id === "sections" ? (
               <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{items.map((i) => <li key={i.id}><Link href={`/sections#${i.id}`} className="block rounded-2xl border border-line bg-panel p-5 hover:border-teal"><p className="font-semibold">{i.title}</p><p className="text-sm text-mute">{i.lib} — {i.id}</p></Link></li>)}</ul>
             ) : (
-              <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{items.map((i) => <Stage key={i.id} id={i.id} title={i.title} lib={i.lib} legacy={i.legacy}><i.C /></Stage>)}</div>
+              <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">{items.map((i) => <Stage key={i.id} id={i.id} title={i.title} lib={i.lib} legacy={i.legacy} item={i} siblings={items}><i.C /></Stage>)}</div>
             )}
           </section>
         );

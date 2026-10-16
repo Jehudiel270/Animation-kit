@@ -123,6 +123,10 @@ input:is([type="text"], [type="email"], [type="search"], [type="number"], [type=
 select:focus,
 textarea:focus { border-color: var(--color-violet); }
 select { color-scheme: inherit; }
+[data-v2-preview] .text-violet { color: var(--color-violet) !important; }
+[data-v2-preview] .bg-violet { background-color: var(--color-violet) !important; }
+[data-v2-preview] .text-teal { color: var(--color-violet) !important; }
+[data-v2-preview] .bg-teal { background-color: var(--color-violet) !important; }
 .btn { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: .5rem; border-radius: 999px; padding: .6rem 1.4rem; font-weight: 600; cursor: pointer; transition: transform .2s; }
 .btn:active { transform: scale(.97); }
 .btn-primary { background: var(--color-violet); color: #fff; }
