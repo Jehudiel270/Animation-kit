@@ -3,6 +3,7 @@ import { useDeferredValue, useMemo, useState } from "react";
 import { Check, Search } from "lucide-react";
 import { AnimatedIcon, Icon, type IconMotion, type IconName } from "./Icon";
 import { icons } from "lucide-react";
+import { rangeProgressStyle } from "@/lib/range-progress";
 
 const ALL = Object.keys(icons).filter((n) => !n.endsWith("Icon") && !n.startsWith("Lucide")).sort() as IconName[];
 const PAGE = 240;
@@ -39,8 +40,8 @@ export function IconGallery() {
 
       <div className="sticky top-14 z-20 mt-8 flex flex-wrap items-center gap-4 rounded-2xl border border-line bg-ink/90 p-4 backdrop-blur">
         <label className="relative min-w-60 flex-1"><span className="sr-only">Rechercher une icône</span><Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-mute" /><input value={q} onChange={(e) => { setQ(e.target.value); setLimit(PAGE); }} placeholder="Rechercher : heart, arrow, user…" className="w-full rounded-xl border border-line bg-panel py-2.5 pl-10 pr-3 outline-none focus:border-teal" /></label>
-        <label className="flex items-center gap-2 text-sm text-mute">Taille<input type="range" min={16} max={64} value={size} onChange={(e) => setSize(+e.target.value)} />{size}px</label>
-        <label className="flex items-center gap-2 text-sm text-mute">Trait<input type="range" min={0.5} max={3} step={0.25} value={stroke} onChange={(e) => setStroke(+e.target.value)} />{stroke}</label>
+        <label className="flex items-center gap-2 text-sm text-mute">Taille<input type="range" min={16} max={64} value={size} style={rangeProgressStyle(size, 16, 64)} onChange={(e) => setSize(+e.target.value)} />{size}px</label>
+        <label className="flex items-center gap-2 text-sm text-mute">Trait<input type="range" min={0.5} max={3} step={0.25} value={stroke} style={rangeProgressStyle(stroke, 0.5, 3)} onChange={(e) => setStroke(+e.target.value)} />{stroke}</label>
         <label className="flex items-center gap-2 text-sm text-mute">Couleur<input type="color" value={color} onChange={(e) => setColor(e.target.value)} className="h-9 w-12 cursor-pointer rounded bg-transparent" /></label>
       </div>
 

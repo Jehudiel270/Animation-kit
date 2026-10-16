@@ -5,6 +5,7 @@ import Demo from './Demo'
 import { info } from '../lib/describe'
 import { defaultsFor, paramsFor, type Param } from '../lib/params'
 import type { Fx } from '../lib/registry'
+import { rangeProgressStyle } from '@/lib/range-progress'
 
 const box = 'w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2 text-sm outline-none transition focus:border-violet-400'
 
@@ -16,7 +17,7 @@ function Field({ P, v, on }: { P: Param; v: any; on: (x: any) => void }) {
   return (
     <div className="grid gap-1.5">
       <div className="flex items-center justify-between text-sm"><span className="text-white/70">{P.label}</span><span className="tabular-nums text-white">{P.type === 'range' ? v : P.type === 'color' ? v : ''}</span></div>
-      {P.type === 'range' && <input type="range" min={P.min} max={P.max} step={P.step} value={v} onChange={e => on(+e.target.value)} className="h-5 accent-violet-500" />}
+      {P.type === 'range' && <input type="range" min={P.min} max={P.max} step={P.step} value={v} style={rangeProgressStyle(Number(v), P.min ?? 0, P.max ?? 100)} onChange={e => on(+e.target.value)} className="h-5 accent-violet-500" />}
       {P.type === 'color' && <input type="color" value={v} onChange={e => on(e.target.value)} className="h-9 w-full cursor-pointer rounded-lg border border-white/15 bg-transparent" />}
       {P.type === 'text' && <input value={v} onChange={e => on(e.target.value)} className={box} />}
       {P.type === 'select' && <select value={v} onChange={e => on(e.target.value)} className={box + ' bg-[#12151c]'}>{P.options!.map(x => <option key={x} value={x}>{x}</option>)}</select>}

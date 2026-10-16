@@ -2,7 +2,9 @@
 import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Check, Copy, Maximize2, RotateCcw, X } from "lucide-react";
+import { createPortal } from "react-dom";
 import { gsap } from "@/lib/gsap";
+import { rangeProgressStyle } from "@/lib/range-progress";
 import Lab from "@/legacy-v1/components/Lab";
 import { REG as LEGACY_EFFECTS, type Fx } from "@/legacy-v1/lib/registry";
 
@@ -32,6 +34,11 @@ export function Stage({ id, title, lib, children, legacy }: { id: string; title:
   const [speed, setSpeed] = useState(100);
   const [activeLegacy, setActiveLegacy] = useState<Fx | null>(null);
   const previewRef = useRef<HTMLDivElement>(null);
+  const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setPortalRoot(document.body);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -64,7 +71,7 @@ export function Stage({ id, title, lib, children, legacy }: { id: string; title:
 
   return (
     <figure id={id} ref={ref} className="flex flex-col overflow-hidden rounded-2xl border border-line bg-panel">
-      <div className="relative h-60 overflow-hidden bg-ink">{inView && <Fragment key={run}>{children}</Fragment>}</div>
+      <div className="relative h-60 overflow-hidden bg-ink">{inView && !open && <Fragment key={run}>{children}</Fragment>}</div>
       <figcaption className="flex items-center justify-between gap-3 p-4">
         <div className="min-w-0">
           <p className="truncate font-semibold">{title}</p>
@@ -76,7 +83,8 @@ export function Stage({ id, title, lib, children, legacy }: { id: string; title:
           <button className="icon-btn" aria-label="Copier l'identifiant" onClick={copy}>{copied ? <Check size={16} /> : <Copy size={16} />}</button>
         </div>
       </figcaption>
-      <AnimatePresence>
+      {portalRoot && createPortal(
+        <AnimatePresence>
         {open && (activeLegacy ? (
           <Lab
             key={activeLegacy.id}
@@ -112,7 +120,7 @@ export function Stage({ id, title, lib, children, legacy }: { id: string; title:
                 ].map((control) => (
                   <label key={control.label} className="grid gap-2 text-sm">
                     <span className="flex justify-between"><span>{control.label}</span><span className="text-mute">{control.value}{control.suffix}</span></span>
-                    <input type="range" min={control.min} max={control.max} step={control.step} value={control.value} onChange={(event) => control.set(Number(event.target.value))} />
+                    <input type="range" min={control.min} max={control.max} step={control.step} value={control.value} style={rangeProgressStyle(control.value, control.min, control.max)} onChange={(event) => control.set(Number(event.target.value))} />
                   </label>
                 ))}
                 <button className="btn btn-ghost w-full" onClick={() => { setSpeed(100); setScale(100); setBrightness(100); setHue(0); setRun((value) => value + 1); }}>Réinitialiser les réglages</button>
@@ -121,7 +129,9 @@ export function Stage({ id, title, lib, children, legacy }: { id: string; title:
             </div>
           </motion.div>
         ))}
-      </AnimatePresence>
+        </AnimatePresence>,
+        portalRoot,
+      )}
     </figure>
   );
 }
