@@ -1,5 +1,5 @@
 "use client";
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { animate, motion, useInView } from "motion/react";
 import { Float } from "@react-three/drei";
@@ -91,8 +91,18 @@ export function HorizontalGallery() {
 function Stat({ to, label, suffix = "" }: { to: number; label: string; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  useGSAP(() => { if (inView) animate(0, to, { duration: 2, ease: "easeOut", onUpdate: (v) => { if (ref.current) ref.current.textContent = Math.round(v).toLocaleString("fr-FR") + suffix; } }); }, { dependencies: [inView] });
-  return <div><span ref={ref} className="text-5xl font-extrabold tabular-nums md:text-6xl">0</span><p className="mt-2 text-mute">{label}</p></div>;
+  useEffect(() => {
+    const element = ref.current;
+    if (!inView || !element) return;
+    const controls = animate(0, to, {
+      duration: 1.6,
+      ease: "easeOut",
+      onUpdate: (value) => { element.textContent = Math.round(value).toLocaleString("fr-FR") + suffix; },
+      onComplete: () => { element.textContent = to.toLocaleString("fr-FR") + suffix; },
+    });
+    return () => controls.stop();
+  }, [inView, suffix, to]);
+  return <div><span ref={ref} className="text-5xl font-extrabold tabular-nums md:text-6xl">{to.toLocaleString("fr-FR") + suffix}</span><p className="mt-2 text-mute">{label}</p></div>;
 }
 export function Stats() {
   return <section className="mx-auto grid max-w-6xl gap-10 px-6 py-28 sm:grid-cols-2 md:grid-cols-4"><Stat to={396} label="animations V1 + V2" /><Stat to={18} label="familles" /><Stat to={1500} suffix="+" label="icônes" /><Stat to={26} label="thèmes" /></section>;
